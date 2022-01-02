@@ -25,7 +25,7 @@ RSpec.describe 'Bachelorette Show Page' do
   scenario 'visitor clicks link and sees new page with only that bachelorettes contestants' do
     click_on 'See my contestants'
 
-    expect(current_path).to be("/bachelorettes/#{@bachelorette_1.id}"/contestants)
+    expect(current_path).to eq("/bachelorettes/#{@bachelorette_1.id}/contestants")
     expect(page).to have_content(@contestant_1.name)
     expect(page).to have_content(@contestant_2.name)
     expect(page).to have_content(@contestant_3.name)

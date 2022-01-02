@@ -1,5 +1,5 @@
 <p>Contestants for <%= @bachelorette.name %></p>
 
 <p><%@contestants.each do |contestant|%></p>
-  <li><%= contestant.name %></li>
+  <li>Name: <%= link_to "#{contestant.name}", "/contestants/#{contestant.id}", method: :get %>, Age: <%= contestant.age%>, Hometown: <%= contestant.hometown%></li>
 <% end %>
