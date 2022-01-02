@@ -1,0 +1,5 @@
+<p>Contestants for <%= @bachelorette.name %></p>
+
+<p><%@contestants.each do |contestant|%></p>
+  <li><%= contestant.name %></li>
+<% end %>
