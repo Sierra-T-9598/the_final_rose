@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe Contestant, type: :model do
   describe 'relationships' do
     it {should belong_to :bachelorette}
+    it {should have_many :contestant_outings}
+    it {should have_many(:outings).through(:contestant_outings)}
   end
 
   describe 'validations' do
@@ -37,6 +39,6 @@ RSpec.describe Contestant, type: :model do
         expect(@contestant_3.season_description).to eq(@bachelorette_1.description)
         expect(@contestant_4.season_description).to eq(@bachelorette_2.description)
       end
-    end 
+    end
   end
 end
