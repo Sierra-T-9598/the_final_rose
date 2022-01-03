@@ -36,12 +36,14 @@ RSpec.describe 'Contestant Show Page' do
   end
 
   scenario 'visitor sees a list of the outings that this contestant has been on while on the show' do
-    save_and_open_page
     expect(page).to have_content(@outing_1.name)
     expect(page).to have_content(@outing_2.name)
   end
 
   scenario 'visitor sees each outing name as a link' do
+    expect(page).to have_link("#{@outing_1.name}")
+    expect(page).to have_link("#{@outing_2.name}")
+    save_and_open_page
   end
 
   scenario 'visitor clicks outing name and is taken to that outings show page' do

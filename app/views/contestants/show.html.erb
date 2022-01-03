@@ -3,5 +3,5 @@
 <br>
 <p>Outings:</p>
 <%@outings.each do |outing|%>
-  <li><%= outing.name %></li>
+  <li><%= link_to "#{outing.name}", "/outings/#{outing.id}", method: :get %></li>
 <% end %>
