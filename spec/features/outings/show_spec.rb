@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Contestant Show Page' do
+RSpec.describe 'Outing Show Page', type: :feature do
   before(:each) do
     @bachelorette_1 = Bachelorette.create!(name: "Hannah", season_number: 3, description: "The Most Dramatic Season Yet!")
     @bachelorette_2 = Bachelorette.create!(name: "Lily", season_number: 5, description: "The Most Romantic Season Yet!")
@@ -22,30 +22,21 @@ RSpec.describe 'Contestant Show Page' do
 
     @outing_1.contestants << @contestant_2
 
-    visit contestant_path(@contestant_3.id)
+    visit outing_path(@outing_2.id)
   end
 
-  scenario 'visitor sees contestant name' do
-    expect(page).to have_content(@contestant_3.name)
-  end
-
-  scenario 'visitor sees season number and season description that contestant was on' do
-    expect(page).to have_content("Season #{@bachelorette_1.season_number}")
-    expect(page).to have_content(@bachelorette_1.description)
-  end
-
-  scenario 'visitor sees a list of the outings that this contestant has been on while on the show' do
-    expect(page).to have_content(@outing_1.name)
+  scenario 'visitor sees that outings name, location, and date' do
     expect(page).to have_content(@outing_2.name)
+    expect(page).to have_content(@outing_2.location)
+    expect(page).to have_content(@outing_2.date)
   end
 
-  scenario 'visitor sees each outing name as a link' do
-    expect(page).to have_link("#{@outing_1.name}")
-    expect(page).to have_link("#{@outing_2.name}")
+  scenario 'visitor sees a total count of contestants on the outing' do
+    expect(page).to have_content("Count of Contestants: #{@outing_2.count_contestants}")
   end
 
-  scenario 'visitor clicks outing name and is taken to that outings show page' do
-    click_on "#{@outing_2.name}"
-    expect(current_path).to eq("/outings/#{@outing_2.id}")
+  scenario 'visitor sees a list of all the names of those contestants' do
+    expect(page).to have_content(@contestant_3.name)
+    expect(page).to have_content(@contestant_1.name)
   end
 end
