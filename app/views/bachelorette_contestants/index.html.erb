@@ -3,3 +3,8 @@
 <p><%@contestants.each do |contestant|%></p>
   <li>Name: <%= link_to "#{contestant.name}", "/contestants/#{contestant.id}", method: :get %>, Age: <%= contestant.age%>, Hometown: <%= contestant.hometown%></li>
 <% end %>
+
+<p>These Contestants are from these hometowns: </p>
+<%@bachelorette.unique_hometowns_list.each do |town| %>
+<li><%=town%></li>
+<% end %>
