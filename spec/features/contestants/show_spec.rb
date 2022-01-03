@@ -43,9 +43,11 @@ RSpec.describe 'Contestant Show Page' do
   scenario 'visitor sees each outing name as a link' do
     expect(page).to have_link("#{@outing_1.name}")
     expect(page).to have_link("#{@outing_2.name}")
-    save_and_open_page
   end
 
   scenario 'visitor clicks outing name and is taken to that outings show page' do
+    click_on "#{@outing_2.name}"
+    expect(current_path).to eq("/outings/#{@outing_2.id}")
+    save_and_open_page
   end
 end
