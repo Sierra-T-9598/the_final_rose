@@ -37,6 +37,12 @@ RSpec.describe "A bachelorette's contestants Index" do
   scenario 'visitor clicks on contestant name and is taken to that contestant show page' do
     click_link "#{@contestant_3.name}"
     expect(current_path).to eq(contestant_path(@contestant_3.id))
-    # save_and_open_page
+  end
+
+  scenario 'visitor sees unique list of all hometowns that these contestants are from' do
+    expect(page).to have_content(@contestant_1.hometown)
+    expect(page).to have_content(@contestant_2.hometown)
+    expect(page).to have_content(@contestant_3.hometown)
+    save_and_open_page
   end
 end

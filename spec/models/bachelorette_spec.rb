@@ -16,11 +16,23 @@ RSpec.describe Bachelorette, type: :model do
         bachelorette_1 = Bachelorette.create!(name: "Hannah", season_number: 3, description: "The Most Dramatic Season Yet!")
         bachelorette_2 = Bachelorette.create!(name: "Lily", season_number: 5, description: "The Most Romantic Season Yet!")
         contestant_1 = bachelorette_1.contestants.create!(name: "Joey", age: 31, hometown: 'Charlestown')
-        contestant_2 = bachelorette_1.contestants.create!(name: "Marcus", age: 26, hometown: 'Pittsburg')
+        contestant_2 = bachelorette_1.contestants.create!(name: "Marcus", age: 26, hometown: 'Sandpoint')
         contestant_3 = bachelorette_1.contestants.create!(name: "Georgie", age: 28, hometown: 'Sandpoint')
         contestant_4 = bachelorette_2.contestants.create!(name: "Mike", age: 24, hometown: 'Bellingham')
 
         expect(bachelorette_1.contestants_average_age).to eq(28.33)
+      end
+    end
+
+    describe '#unique_hometowns_list' do
+      it 'gives a unique list of all hometowns for the given contestants' do
+        bachelorette_1 = Bachelorette.create!(name: "Hannah", season_number: 3, description: "The Most Dramatic Season Yet!")
+        bachelorette_2 = Bachelorette.create!(name: "Lily", season_number: 5, description: "The Most Romantic Season Yet!")
+        contestant_1 = bachelorette_1.contestants.create!(name: "Joey", age: 31, hometown: 'Charlestown')
+        contestant_2 = bachelorette_1.contestants.create!(name: "Marcus", age: 26, hometown: 'Sandpoint')
+        contestant_3 = bachelorette_1.contestants.create!(name: "Georgie", age: 28, hometown: 'Sandpoint')
+        contestant_4 = bachelorette_2.contestants.create!(name: "Mike", age: 24, hometown: 'Bellingham')
+        expect(bachelorette_1.unique_hometowns_list).to eq([contestant_1.hometown, contestant_2.hometown])
       end
     end
   end
