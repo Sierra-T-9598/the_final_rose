@@ -33,9 +33,10 @@ RSpec.describe 'Outing Show Page', type: :feature do
 
   scenario 'visitor sees a total count of contestants on the outing' do
     expect(page).to have_content("Count of Contestants: #{@outing_2.count_contestants}")
-    save_and_open_page
   end
 
   scenario 'visitor sees a list of all the names of those contestants' do
+    expect(page).to have_content(@contestant_3.name)
+    expect(page).to have_content(@contestant_1.name)
   end
 end
