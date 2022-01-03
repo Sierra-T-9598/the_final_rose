@@ -9,6 +9,19 @@ RSpec.describe 'Contestant Show Page' do
     @contestant_3 = @bachelorette_1.contestants.create!(name: "Georgie", age: 28, hometown: 'Sandpoint')
     @contestant_4 = @bachelorette_2.contestants.create!(name: "Mike", age: 24, hometown: 'Bellingham')
 
+    @outing_1 = Outing.create!(name: "Kickball", location: "Homer, AK", date: "08/23/19")
+    @outing_2 = Outing.create!(name: "Hot Springs", location: "Salmon, ID", date: "09/25/19")
+    @outing_3 = Outing.create!(name: "Helicopter Ride", location: "Moab, UT", date: "08/25/20")
+    @outing_4 = Outing.create!(name: "Dinner", location: "Salt Lake City, UT", date: "09/25/20")
+
+    @outing_1.contestants << @contestant_3
+    @outing_2.contestants << @contestant_3
+
+    @outing_1.contestants << @contestant_1
+    @outing_2.contestants << @contestant_1
+
+    @outing_1.contestants << @contestant_2
+
     visit contestant_path(@contestant_3.id)
   end
 
@@ -20,10 +33,12 @@ RSpec.describe 'Contestant Show Page' do
     # require "pry"; binding.pry
     expect(page).to have_content("Season #{@bachelorette_1.season_number}")
     expect(page).to have_content(@bachelorette_1.description)
-    # save_and_open_page
   end
 
   scenario 'visitor sees a list of the outings that this contestant has been on while on the show' do
+    save_and_open_page
+    expect(page).to have_content(@outing_1.name)
+    expect(page).to have_content(@outing_2.name)
   end
 
   scenario 'visitor sees each outing name as a link' do

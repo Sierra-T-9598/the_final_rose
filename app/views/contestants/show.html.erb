@@ -1,2 +1,7 @@
 <h1>Contestant: <%= @contestant.name %></h1>
 <p>Season <%=@contestant.season%> - <%=@contestant.season_description%></p>
+<br>
+<p>Outings:</p>
+<%@outings.each do |outing|%>
+  <li><%= outing.name %></li>
+<% end %>
